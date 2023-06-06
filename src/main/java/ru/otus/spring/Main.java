@@ -1,10 +1,9 @@
-package ru.otus.spring_2023_05;
+package ru.otus.spring;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.otus.spring_2023_05.dto.Question;
-import ru.otus.spring_2023_05.service.QuestionService;
+import ru.otus.spring.dto.Question;
+import ru.otus.spring.service.QuestionService;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Main {

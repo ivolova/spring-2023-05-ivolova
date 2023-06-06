@@ -1,4 +1,4 @@
-package ru.otus.spring_2023_05.dto;
+package ru.otus.spring.dto;
 
 public class Question {
   private String questionLine;
@@ -13,8 +13,6 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" +
-                "questionLine='" + questionLine + '\'' +
-                '}';
+        return  questionLine + "\n";
     }
 }

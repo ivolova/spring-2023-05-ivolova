@@ -1,7 +1,7 @@
-package ru.otus.spring_2023_05.service;
+package ru.otus.spring.service;
 
-import ru.otus.spring_2023_05.dao.QuestionDao;
-import ru.otus.spring_2023_05.dto.Question;
+import ru.otus.spring.dao.QuestionDao;
+import ru.otus.spring.dto.Question;
 
 import java.util.List;
 
