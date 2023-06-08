@@ -4,16 +4,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="QuestionDao" class="ru.otus.spring.homework_1.dao.QuestionDaoImpl">
-        <property name="csvName" value="questions.csv">
-        </property>
+    <bean id="QuestionDao" class="ru.otus.spring.dao.CsvQuestionDao">
+        <constructor-arg index="0" value="questions.csv"/>
     </bean>
 
-    <bean id="QuestionService" class="ru.otus.spring.homework_1.service.QuestionServiceImpl">
-        <property name="dao" ref="QuestionDao">
+    <bean id="QuestionService" class="ru.otus.spring.service.QuestionServiceImpl">
+        <constructor-arg index="0" ref ="QuestionDao"/>
+    </bean>
+
+    <bean id="PrintQuestionService" class="ru.otus.spring.service.PrintQuestionServiceImpl">
+        <property name="questionService" ref="QuestionService">
         </property>
-
-
     </bean>
 
 </beans>
