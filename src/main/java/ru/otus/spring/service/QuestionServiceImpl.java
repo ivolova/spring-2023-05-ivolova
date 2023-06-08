@@ -2,10 +2,11 @@ package ru.otus.spring.service;
 
 import ru.otus.spring.dao.QuestionDao;
 import ru.otus.spring.dto.Question;
+import ru.otus.spring.service.QuestionService;
 
 import java.util.List;
 
-public class QuestionServiceImpl implements QuestionService{
+public class QuestionServiceImpl implements QuestionService {
    private QuestionDao dao;
 
     @Override

@@ -1,6 +1,5 @@
 package ru.otus.spring.dao;
 
-import org.springframework.core.io.ClassPathResource;
 import ru.otus.spring.dto.Question;
 
 import java.io.*;
