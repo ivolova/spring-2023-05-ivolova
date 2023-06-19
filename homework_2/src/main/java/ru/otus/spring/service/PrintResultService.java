@@ -12,13 +12,13 @@ import java.util.Map;
 public class PrintResultService {
 
     PersonDao personDao;
-    QuizService quizService;
+   // QuizService quizService;
 
     PersonAnswerDao personAnswerDao;
 
-    public PrintResultService(PersonDao personDao, QuizService quizService, PersonAnswerDao personAnswerDao) {
+    public PrintResultService(PersonDao personDao, /*QuizService quizService,*/ PersonAnswerDao personAnswerDao) {
         this.personDao = personDao;
-        this.quizService = quizService;
+      //  this.quizService = quizService;
         this.personAnswerDao = personAnswerDao;
     }
 

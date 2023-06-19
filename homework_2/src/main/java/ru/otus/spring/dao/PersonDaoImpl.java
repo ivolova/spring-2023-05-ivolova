@@ -2,37 +2,26 @@ package ru.otus.spring.dao;
 
 import org.springframework.stereotype.Component;
 import ru.otus.spring.dto.Person;
+import ru.otus.spring.service.IOService;
 
-import java.util.Scanner;
 
 @Component
 public class PersonDaoImpl implements PersonDao {
 
     Person person;
 
-    public PersonDaoImpl(Person person) {
-        this.person = person;
+    private final IOService ioService;
+
+    public PersonDaoImpl(IOService ioService) {
+        this.ioService = ioService;
     }
 
-    public void setPersonData() {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Укажите имя: ");
-            String firstName = scanner.nextLine();
-            System.out.print("Укажите фамилию : ");
-            String secondName = scanner.nextLine();
-            //System.out.println("firstName: " + firstName + "secondName" + secondName);
-            this.person.setPersonData(firstName,secondName);
-    }
-
-
-
-    public Person getPerson(){
+    public Person getPerson() {
+        if (this.person == null) {
+            String firstName = ioService.readStringWithPrompt("Укажите имя: ");
+            String secondName = ioService.readStringWithPrompt("Укажите фамилию : ");
+            this.person = new Person(firstName, secondName);
+        }
         return this.person;
     }
-
-//
-//    PersonDaoImpl() {
-//        this.person = getPerson();
-//    }
-
 }

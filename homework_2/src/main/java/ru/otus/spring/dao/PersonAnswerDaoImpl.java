@@ -1,7 +1,6 @@
 package ru.otus.spring.dao;
 
 import org.springframework.stereotype.Component;
-import ru.otus.spring.dto.Person;
 import ru.otus.spring.dto.Question;
 
 import java.util.LinkedHashMap;

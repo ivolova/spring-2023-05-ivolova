@@ -1,6 +1,7 @@
 package ru.otus.spring.dao;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -32,32 +33,32 @@ public class CsvQuestionDao implements QuestionDao {
     @Override
     public List<Question> getQuestions() {
         List<Question> result = new ArrayList<>();
-        InputStream is = getClass().getClassLoader().getResourceAsStream(csvName);
-        if (is != null) {
-            try (CSVReader csvReader = new CSVReader(
-                    new BufferedReader(
-                            new InputStreamReader(is, StandardCharsets.UTF_8)), ';')) {
-                for (String[] row : csvReader.readAll()) {
-                    String questionRow = "";
-                    String correctAnswer = "";
-                    List<String> answers = new ArrayList<>();
-                    if (row.length > 0) {
-                        questionRow = row[0];
-                        correctAnswer = row[1];
-                        answers.addAll(Arrays.asList(row).subList(2, row.length));
-                    }
-                    Question question = new Question();
-//                    question.setQuestion(questionRow);
-//                    question.setCorrectAnswer(correctAnswer);
-//                    question.setAnswers(answers);
-                    question.setQuestionData(questionRow, correctAnswer, answers );
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(csvName)) {
+            if (is != null) {
+                CSVReader csvReader = new CSVReader(
+                        new BufferedReader(
+                                new InputStreamReader(is, StandardCharsets.UTF_8)), ';');
+                    for (String[] row : csvReader.readAll()) {
+                        String questionRow = "";
+                        String correctAnswer = "";
+                        List<String> answers = new ArrayList<>();
+                        if (row.length > 0) {
+                            questionRow = row[0];
+                            correctAnswer = row[1];
+                            answers.addAll(Arrays.asList(row).subList(2, row.length));
+                        }
+                        Question question = new Question();
+    //                    question.setQuestion(questionRow);
+    //                    question.setCorrectAnswer(correctAnswer);
+    //                    question.setAnswers(answers);
+                        question.setQuestionData(questionRow, correctAnswer, answers);
 
-                    result.add(question);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
+                        result.add(question);
+                    }
+
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return result;
     }
