@@ -11,8 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.otus.spring.dao.PersonAnswerDaoImpl;
 import ru.otus.spring.dao.PersonDaoImpl;
 import ru.otus.spring.dto.Question;
-
-import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -30,38 +28,38 @@ class QuizServiceTest {
     PersonDaoImpl personDao;
     @Mock
     PersonAnswerDaoImpl personAnswerDao;
+    @Mock
+    IOService   ioService;
+    @Mock
+    PrintResultService printResultService;
 
     @BeforeEach
     public void setUp() {
-//        MockitoAnnotations.initMocks(this);
         MockitoAnnotations.openMocks(this);
     }
-
 
     @Test
     void startQuiz() {
 
 
         // Given
-        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
-        System.setIn(in);
+        when(quizService.getAnswer()).thenReturn("1").thenReturn("2");
+
 
         when(quizService.getQuestionService().getQuestions()).thenReturn(
-                List.of(new Question().setQuestion("Q1")
-//                        ,
-//                        new Question().setQuestion("Q2"),
-//                        new Question().setQuestion("Q3")
-                ));
+                List.of(new Question().setQuestion("Q1"),
+                        new Question().setQuestion("Q2")
 
+                ));
 
         // When
         quizService.startQuiz();
 
-
         // Then
         verify(quizService.getPersonAnswerDao(), times(1))
-                .addAnswer(new Question().setQuestion("Q1"), "1");
-
+                .addAnswer(new Question().setQuestion("Q1"), "1") ;
+        verify(quizService.getPersonAnswerDao(), times(1))
+                .addAnswer(new Question().setQuestion("Q2"), "2") ;
 
     }
 }
